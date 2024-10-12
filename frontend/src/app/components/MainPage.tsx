@@ -2,10 +2,14 @@ import Link from 'next/link'
 import React from 'react'
 import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Bubbles from './Bubble';
+import { WalletSelector } from './Wallet-Selector';
+import Wallet from './Wallet';
+import TokenInteraction from './TokenInteraction';
 
 const MainPage = () => {
   return (
     <div>
+      <img src="/lp.png" className="relative h-screen w-lvw object-cover" />
  {/* <ClerkProvider>
       <div className="absolute top-4 flex justify-between right-64 space-x-6">
   <SignedOut>
@@ -30,7 +34,10 @@ const MainPage = () => {
   <Link href="/upload">
     <button className="text-5xl">Launch App</button>
   </Link>
+  
  
+
+
 </div>
 
     </div>

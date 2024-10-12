@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Bubbles from "./Bubble";
+import TokenInteraction from "./TokenInteraction";
+import  Wallet  from "./Wallet";
 
 
 const UploadForm: React.FC = () => {
@@ -59,6 +61,10 @@ const UploadForm: React.FC = () => {
 
   return (
     <>
+    <div className="absolute top-0 left-0 right-0">
+    <img src="scriptpage.png" className="relative h-screen w-lvw object-cover" />
+    </div>
+    <div className="">
           <Link href="/minning">
       <button className="absolute right-1/3 top-4 bg-gradient-to-r from-blue-500 to-teal-400 p-2 border hover:from-blue-700 hover:to-teal-600 duration-500 rounded-md">Mine</button>
       </Link>
@@ -86,13 +92,13 @@ const UploadForm: React.FC = () => {
 
 
         
-      <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter text-center">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+      <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter text-center pl-44 z-50">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-black to-teal-200 border-white">
           Upload your Python scripts
         </span>
       </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6 space-x-6 text-center">
+      <form onSubmit={handleSubmit} className="space-y-6 space-x-6 text-center z-50">
         <input
           className="border border-gray-300 p-3 rounded-md"
           type="file"
@@ -100,12 +106,22 @@ const UploadForm: React.FC = () => {
           onChange={handleFileChange}
           required
         />
-        <button
+        {/* <button
           type="submit"
-          className="bg-[#4FD1c5] text-white p-3 rounded-md hover:bg-blue-500"
+          className="bg-[#4FD1c5] text-white p-3 rounded-md hover:bg-blue-500 z-50"
+        >
+          Upload
+        </button> */}
+        <div className="w-[156px] h-14 px-[33px] bg-gradient-to-bl from-[#18c7ff] to-[#933ffd] rounded-[10px] border border-white justify-center items-center inline-flex">
+    <div className="text-center text-white text-xl font-semibold font-['Inter'] leading-none">
+    <button
+          type="submit"
+          // className="bg-[#4FD1c5] text-white p-3 rounded-md hover:bg-blue-500 z-50"
         >
           Upload
         </button>
+    </div>
+</div>
       </form>
 
 
@@ -120,11 +136,14 @@ const UploadForm: React.FC = () => {
       
 
       {cid && (
-        <p className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 mt-3">
+        <p className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 mt-3 z-50">
           CID : {cid}
         </p>
       )}
+     
     </div>
+    </div>
+    <TokenInteraction />
     </>
   );
 };
