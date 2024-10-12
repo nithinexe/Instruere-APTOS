@@ -5,7 +5,6 @@ import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton, SignUp
 import Bubbles from "./Bubble";
 
 
-
 const UploadForm: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string>("");
