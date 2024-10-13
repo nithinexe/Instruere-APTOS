@@ -10,15 +10,21 @@
 
 1. Clone the repo
    ```sh
-   https://github.com/D1ANAND/InstruereBlockchain.git
+   https://github.com/a-sahil/instruere
    
    ```
-2. Install NPM packages
+2. Go to Directory
+  ```sh
+   cd frontend
+
+  ```
+
+3. Install NPM packages
    ```sh
    npm install
    ```
    
-3. Start project
+4. Start project
    ```sh
    npm run dev
    ```
