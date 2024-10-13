@@ -14,14 +14,15 @@ export default function TokenInteractionWithVideo() {
   const { addEnhancedBlock, getEnhancedBlockDetails, getMinerTokenBalance, getEnhancedBlockCount } = useInstruereContract();
   
   const [showVideo, setShowVideo] = useState(true);
-  const [loadingImage, setLoadingImage] = useState(false); // Loading state for image transition
+  const [loadingImage, setLoadingImage] = useState(false);
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [balance, setBalance] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [visibleBlocksCount, setVisibleBlocksCount] = useState(0);
-  const [miningStatus, setMiningStatus] = useState<string | null>(null); // Mining state
-  const [ipfsHash, setIpfsHash] = useState<string | null>(null); // IPFS hash
+  const [miningStatus, setMiningStatus] = useState<string | null>(null);
+  const [ipfsHash, setIpfsHash] = useState<string | null>(null);
+  const [transactionSuccessful, setTransactionSuccessful] = useState(false);
 
   useEffect(() => {
     if (account) {
@@ -53,6 +54,8 @@ export default function TokenInteractionWithVideo() {
           const block = await getEnhancedBlockDetails(account.address, i);
           if (block) newBlocks.push(block);
         }
+        // Sort blocks by timestamp (earliest first)
+        newBlocks.sort((a, b) => a.timestamp - b.timestamp);
         setBlocks(newBlocks);
 
         const bal = await getMinerTokenBalance(account.address);
@@ -67,39 +70,38 @@ export default function TokenInteractionWithVideo() {
     }
   };
 
-  const handleAddBlock = async () => {
-    if (account) {
-      setLoading(true);
-      setError(null);
-      try {
-        // Call the API/mine endpoint
-        const response = await fetch('/api/mine');
-        const result = await response.json();
-
-        if (response.ok && result.ipfsHash) {
-          setMiningStatus('Mining completed successfully!');
-          setIpfsHash(result.ipfsHash); // Store the IPFS hash
-          await addEnhancedBlock(account.address, Date.now());
-          await fetchData(); // Fetch the new data
-        } else {
-          setError(result.error || 'Failed to mine. Please try again.');
-          setMiningStatus(null);
-        }
-      } catch (err) {
-        setError('Failed to mine. Please try again.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
-
-  const handleToggleVideoImage = () => {
+  const handleToggleVideoImage = async () => {
     setLoadingImage(true); 
     setTimeout(() => {
       setShowVideo(false); 
       setLoadingImage(false); 
     }, 2000);
+    if (account) {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('/api/mine');
+        const result = await response.json();
+
+        if (response.ok && result.ipfsHash) {
+          setMiningStatus('Mining completed successfully!');
+          setIpfsHash(result.ipfsHash);
+          await addEnhancedBlock(account.address, Date.now());
+          setTransactionSuccessful(true); // Indicate the transaction was successful
+          await fetchData(); // Fetch data after successful transaction
+        } else {
+          setError(result.error || 'Failed to mine. Please try again.');
+          setMiningStatus(null);
+          setTransactionSuccessful(false); // Indicate the transaction was unsuccessful
+        }
+      } catch (err) {
+        setError('Failed to mine. Please try again.');
+        console.error(err);
+        setTransactionSuccessful(false); // Indicate the transaction was unsuccessful
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   if (!account) return <div>Please connect your wallet</div>;
@@ -127,31 +129,23 @@ export default function TokenInteractionWithVideo() {
               <h1>Instruere Network</h1>
               {error && <p style={{ color: 'red' }}>{error}</p>}
               <p>Miner Token Balance: {balance !== null ? balance : 'Loading...'}</p>
-
               {miningStatus && <p className="mt-4">{miningStatus}</p>}
 
-              {ipfsHash && (
-                <div className="mt-6">
-                  <p>IPFS Hash: {ipfsHash}</p>
-                  <a href={`https://gateway.pinata.cloud/ipfs/${ipfsHash}`} target="_blank" rel="noopener noreferrer" className="text-blue-400">
-                    View on IPFS
-                  </a>
-                </div>
-              )}
-
-              <h2 className="mt-6">Activity:</h2>
+              <h2 className="mt-6 text-4xl">Activity:</h2>
               {loading ? (
                 <p>Loading...</p>
-              ) : blocks && blocks.length > 0 ? (
+              ) : transactionSuccessful && blocks.length > 0 ? (
                 <ul className="list-disc">
                   {blocks.slice(0, visibleBlocksCount).map((block, index) => (
-                    <li key={index} className="mt-2">
-                      Data: {block.data}, Timestamp: {new Date(block.timestamp).toLocaleString()}, Miner: {block.miner}
+                    <li key={index} className="mt-2 text-lg ">
+                      Block: {index + 1}, 
+                      Timestamp: {typeof block.timestamp === 'number' ? new Date(block.timestamp).toLocaleString() : 'No Timestamp'}, 
+                      Miner: {typeof block.miner === 'string' ? block.miner : 'No Miner'}
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p>No blocks found.</p>
+                <p>Loading...</p>
               )}
             </div>
           )}
@@ -161,7 +155,7 @@ export default function TokenInteractionWithVideo() {
       {showVideo && (
         <button
           onClick={handleToggleVideoImage}
-          className="absolute top-72 left-3/4 transform -translate-x-1/2 bg-blue-600 text-white py-4 px-16 rounded-lg text-2xl"
+          className="absolute top-72 left-3/4 transform -translate-x-1/2 bg-gradient-to-r from-[#18c7ff] to-[#933ffd] hover:from-[#18c7ff] hover:to-[#933ffd] text-white py-4 px-16 rounded-lg text-2xl"
           disabled={loadingImage}
         >
           Mining

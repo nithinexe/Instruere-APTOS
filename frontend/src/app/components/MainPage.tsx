@@ -9,7 +9,7 @@ import TokenInteraction from './TokenInteraction';
 const MainPage = () => {
   return (
     <div>
-      <img src="/lp.png" className="relative h-screen w-lvw object-cover" />
+      <img src="/txnpage2.png" className="relative h-screen w-lvw object-cover" />
  {/* <ClerkProvider>
       <div className="absolute top-4 flex justify-between right-64 space-x-6">
   <SignedOut>
@@ -29,16 +29,14 @@ const MainPage = () => {
 </div>
 </ClerkProvider> */}
 {/* <img src="/logo.png" alt="Logo" className="w-96" /> */}
-<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  pl-4 pr-4 pt-2 pb-2 rounded-lg shadow-lg hover:bg-blue-400 duration-500 bg-[#4FD1c5]">
-
-  <Link href="/upload">
-    <button className="text-5xl">Launch App</button>
-  </Link>
-  
- 
-
-
+<div className="absolute inset-0 flex items-center justify-center left-[40rem]">
+  <div className="pl-4 pr-4 pt-2 pb-2 rounded-lg shadow-lg bg-gradient-to-r from-[#18c7ff] to-[#933ffd] hover:from-[#18c7ff] hover:to-[#933ffd]">
+    <Link href="/upload">
+      <button className="text-4xl">Launch App</button>
+    </Link>
+  </div>
 </div>
+
 
     </div>
 

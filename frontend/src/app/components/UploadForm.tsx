@@ -66,7 +66,7 @@ const UploadForm: React.FC = () => {
     </div>
     <div className="">
           <Link href="/minning">
-      <button className="absolute right-1/3 top-4 bg-gradient-to-r from-blue-500 to-teal-400 p-2 border hover:from-blue-700 hover:to-teal-600 duration-500 rounded-md">Mine</button>
+      <button className="absolute right-1/3 top-4 bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">Mine</button>
       </Link>
 {/*     
     <img src="/logo.png" alt="Logo" className="w-96 absolute top-0 left-0" /> */}
@@ -74,10 +74,10 @@ const UploadForm: React.FC = () => {
       {/* <Bubbles /> */}
 <div className="absolute top-4 flex justify-between right-64 space-x-6">
   <SignedOut>
-    <div className="bg-gradient-to-r from-blue-500 to-teal-400 p-2 border hover:from-blue-700 hover:to-teal-600 duration-500 rounded-md">
+    <div className="bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">
     <SignInButton />
     </div>
-    <div className="bg-gradient-to-r from-blue-500 to-teal-400 p-2 border rounded-md">
+    <div className="bg-gradient-to-r  from-blue-500 to-purple-500 border-white p-2 border rounded-md">
       <SignUpButton />
     </div>
   </SignedOut>
@@ -93,12 +93,12 @@ const UploadForm: React.FC = () => {
 
         
       <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter text-center pl-44 z-50">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-black to-teal-200 border-white">
+        <span className="bg-clip-text text-transparent font-bold text-gradient bg-gradient-to-r from-blue-500 to-purple-500 border-white">
           Upload your Python scripts
         </span>
       </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6 space-x-6 text-center z-50">
+      <form onSubmit={handleSubmit} className="space-y-6 space-x-6 text-center ml-20 z-50">
         <input
           className="border border-gray-300 p-3 rounded-md"
           type="file"
@@ -136,14 +136,13 @@ const UploadForm: React.FC = () => {
       
 
       {cid && (
-        <p className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 mt-3 z-50">
+        <p className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 border-white mt-3 z-50">
           CID : {cid}
         </p>
       )}
      
     </div>
     </div>
-    <TokenInteraction />
     </>
   );
 };
