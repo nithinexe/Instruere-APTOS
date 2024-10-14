@@ -1,11 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import Bubbles from './Bubble';
-import { WalletSelector } from './Wallet-Selector';
-import Wallet from './Wallet';
-import TokenInteraction from './TokenInteraction';
-
 const MainPage = () => {
   return (
     <div>
@@ -35,6 +29,7 @@ const MainPage = () => {
       <button className="text-4xl">Launch App</button>
     </Link>
   </div>
+  
 </div>
 
 

@@ -1,11 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import Bubbles from "./Bubble";
-import TokenInteraction from "./TokenInteraction";
-import  Wallet  from "./Wallet";
-
+import { SignedOut, SignInButton,SignUpButton, UserButton } from "@clerk/nextjs";
 
 const UploadForm: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -66,13 +62,12 @@ const UploadForm: React.FC = () => {
     </div>
     <div className="">
           <Link href="/minning">
-      <button className="absolute right-1/3 top-4 bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">Mine</button>
+      <button className="absolute right-[30rem] top-6 bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">Mine</button>
       </Link>
 {/*     
     <img src="/logo.png" alt="Logo" className="w-96 absolute top-0 left-0" /> */}
     <div className="abolute flex flex-col justify-center items-center h-screen space-y-8">
-      {/* <Bubbles /> */}
-<div className="absolute top-4 flex justify-between right-64 space-x-6">
+<div className="absolute top-6 flex justify-between right-64 space-x-6">
   <SignedOut>
     <div className="bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">
     <SignInButton />

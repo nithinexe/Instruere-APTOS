@@ -4,7 +4,7 @@ import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import { useInstruereContract } from '../utils/UseInstruereContract';
 
 interface Block {
-  data: string;
+  data: string; 
   timestamp: number;
   miner: string;
 }
@@ -12,7 +12,7 @@ interface Block {
 export default function TokenInteractionWithVideo() {
   const { account } = useWallet();
   const { addEnhancedBlock, getEnhancedBlockDetails, getMinerTokenBalance, getEnhancedBlockCount } = useInstruereContract();
-  
+
   const [showVideo, setShowVideo] = useState(true);
   const [loadingImage, setLoadingImage] = useState(false);
   const [blocks, setBlocks] = useState<Block[]>([]);
@@ -51,10 +51,17 @@ export default function TokenInteractionWithVideo() {
         }
         const newBlocks: Block[] = [];
         for (let i = 0; i < count; i++) {
-          const block = await getEnhancedBlockDetails(account.address, i);
-          if (block) newBlocks.push(block);
+          const block: any = await getEnhancedBlockDetails(account.address, i);
+          
+          if (block) {
+            const formattedBlock: Block = {
+              data: block.data ?? 'No Data', 
+              timestamp: block.timestamp ?? Date.now(), 
+              miner: block.miner ?? 'Unknown Miner',  
+            };
+            newBlocks.push(formattedBlock);
+          }
         }
-        // Sort blocks by timestamp (earliest first)
         newBlocks.sort((a, b) => a.timestamp - b.timestamp);
         setBlocks(newBlocks);
 
@@ -71,10 +78,10 @@ export default function TokenInteractionWithVideo() {
   };
 
   const handleToggleVideoImage = async () => {
-    setLoadingImage(true); 
+    setLoadingImage(true);
     setTimeout(() => {
-      setShowVideo(false); 
-      setLoadingImage(false); 
+      setShowVideo(false);
+      setLoadingImage(false);
     }, 2000);
     if (account) {
       setLoading(true);
@@ -87,17 +94,17 @@ export default function TokenInteractionWithVideo() {
           setMiningStatus('Mining completed successfully!');
           setIpfsHash(result.ipfsHash);
           await addEnhancedBlock(account.address, Date.now());
-          setTransactionSuccessful(true); 
-          await fetchData(); 
+          setTransactionSuccessful(true);
+          await fetchData();
         } else {
           setError(result.error || 'Failed to mine. Please try again.');
           setMiningStatus(null);
-          setTransactionSuccessful(false); 
+          setTransactionSuccessful(false);
         }
       } catch (err) {
         setError('Failed to mine. Please try again.');
         console.error(err);
-        setTransactionSuccessful(false); 
+        setTransactionSuccessful(false);
       } finally {
         setLoading(false);
       }
@@ -137,7 +144,7 @@ export default function TokenInteractionWithVideo() {
               ) : transactionSuccessful && blocks.length > 0 ? (
                 <ul className="list-disc">
                   {blocks.slice(0, visibleBlocksCount).map((block, index) => (
-                    <li key={index} className="mt-2 text-lg ">
+                    <li key={index} className="mt-2 text-lg">
                       Block: {index + 1}, 
                       Timestamp: {typeof block.timestamp === 'number' ? new Date(block.timestamp).toLocaleString() : 'No Timestamp'}, 
                       Miner: {typeof block.miner === 'string' ? block.miner : 'No Miner'}
