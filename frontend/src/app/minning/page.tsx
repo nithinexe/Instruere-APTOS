@@ -87,17 +87,17 @@ export default function TokenInteractionWithVideo() {
           setMiningStatus('Mining completed successfully!');
           setIpfsHash(result.ipfsHash);
           await addEnhancedBlock(account.address, Date.now());
-          setTransactionSuccessful(true); // Indicate the transaction was successful
-          await fetchData(); // Fetch data after successful transaction
+          setTransactionSuccessful(true); 
+          await fetchData(); 
         } else {
           setError(result.error || 'Failed to mine. Please try again.');
           setMiningStatus(null);
-          setTransactionSuccessful(false); // Indicate the transaction was unsuccessful
+          setTransactionSuccessful(false); 
         }
       } catch (err) {
         setError('Failed to mine. Please try again.');
         console.error(err);
-        setTransactionSuccessful(false); // Indicate the transaction was unsuccessful
+        setTransactionSuccessful(false); 
       } finally {
         setLoading(false);
       }
