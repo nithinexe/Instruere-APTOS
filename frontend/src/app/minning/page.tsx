@@ -91,7 +91,7 @@ export default function TokenInteractionWithVideo() {
         const result = await response.json();
 
         if (response.ok && result.ipfsHash) {
-          setMiningStatus('Mining completed successfully!');
+          setMiningStatus('');
           setIpfsHash(result.ipfsHash);
           await addEnhancedBlock(account.address, Date.now());
           setTransactionSuccessful(true);
@@ -136,7 +136,7 @@ export default function TokenInteractionWithVideo() {
               <h1>Instruere Network</h1>
               {error && <p style={{ color: 'red' }}>{error}</p>}
               <p>Miner Token Balance: {balance !== null ? balance : 'Loading...'}</p>
-              {miningStatus && <p className="mt-4">{miningStatus}</p>}
+              {/* {miningStatus && <p className="mt-4">{miningStatus}</p>} */}
 
               <h2 className="mt-6 text-4xl">Activity:</h2>
               {loading ? (

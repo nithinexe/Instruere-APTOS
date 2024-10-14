@@ -106,7 +106,7 @@ async function mine(ipfsUrl: string) {
 export async function GET(req: NextRequest) {
   try {
     // Call your /api/queue route to get the CID
-    const response = await fetch("https://instruere.vercel.app/api/queue");
+    const response = await fetch("http://localhost:3000/api/queue");
     const data: any = await response.json();
 
     const cid = data.cid;
