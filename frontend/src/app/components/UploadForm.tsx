@@ -58,32 +58,14 @@ const UploadForm: React.FC = () => {
   return (
     <>
     <div className="absolute top-0 left-0 right-0">
-    <img src="scriptpage.png" className="relative h-screen w-lvw object-cover" />
+    <img src="script.png" className="relative h-screen w-lvw object-cover" />
     </div>
     <div className="">
-          <Link href="/minning">
-      <button className="absolute right-[30rem] top-6 bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">Mine</button>
-      </Link>
-{/*     
-    <img src="/logo.png" alt="Logo" className="w-96 absolute top-0 left-0" /> */}
+ 
+    
+    <img src="/logo.png" alt="Logo" className="w-96 absolute top-0 left-0" /> 
     <div className="abolute flex flex-col justify-center items-center h-screen space-y-8">
-{/* <div className="absolute top-6 flex justify-between right-64 space-x-6">
-  <SignedOut>
-    <div className="bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">
-    <SignInButton />
-    </div>
-    <div className="bg-gradient-to-r  from-blue-500 to-purple-500 border-white p-2 border rounded-md">
-      <SignUpButton />
-    </div>
-  </SignedOut>
 
-
-  {/* <SignedIn> */}
-    {/* <div className="bg-gradient-to-r from-blue-500 to-teal-400 p-2 border rounded-md"> */}
-    <UserButton />
-    {/* </div> */}
-  {/* </SignedIn> */}
-{/* </div>  */}
 
 
         
