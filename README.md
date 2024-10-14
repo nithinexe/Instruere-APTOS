@@ -10,12 +10,12 @@
 
 1. Clone the repo
    ```sh
-   https://github.com/a-sahil/instruere
+   https://github.com/a-sahil/instruere.git
    
    ```
 2. Go to Directory
   ```sh
-   cd frontend
+  cd frontend
 
   ```
 
