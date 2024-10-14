@@ -1,10 +1,16 @@
-import { useWallet } from '@aptos-labs/wallet-adapter-react';
-import { Aptos, AptosConfig, Network, InputTransactionData, Block } from '@aptos-labs/ts-sdk';
+import { InputTransactionData, useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk';
 
 const aptosConfig = new AptosConfig({ network: Network.DEVNET });
 const aptosClient = new Aptos(aptosConfig);
 
 const CONTRACT_ADDRESS = "0xe340bbf6b70d2fd8acb4523c8ff4b5365c99827f5518388e72727a44180f6a46";
+
+export interface EnhancedBlock {
+  data: string;
+  timestamp: number;
+  miner: string;
+}
 
 export function useInstruereContract() {
   const { account, signAndSubmitTransaction } = useWallet();
@@ -30,7 +36,7 @@ export function useInstruereContract() {
     }
   };
 
-  const getEnhancedBlockDetails = async (address: string, index: number): Promise<Block | null> => {
+  const getEnhancedBlockDetails = async (address: string, index: number): Promise<EnhancedBlock | null> => {
     try {
       const result = await aptosClient.view({
         payload: {
@@ -39,11 +45,12 @@ export function useInstruereContract() {
           functionArguments: [address, index.toString()]
         }
       });
+
       if (Array.isArray(result) && result.length === 3) {
         return {
-          data: typeof result[0] === 'string' ? result[0] : JSON.stringify(result[0]),
+          data: result[0] as string,
           timestamp: Number(result[1]),
-          miner: typeof result[2] === 'string' ? result[2] : JSON.stringify(result[2])
+          miner: result[2] as string,
         };
       }
       console.error("Unexpected result format:", result);

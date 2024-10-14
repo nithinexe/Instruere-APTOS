@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import { useInstruereContract } from '../utils/UseInstruereContract';
 
+// Block interface definition
 interface Block {
   data: string; 
   timestamp: number;
@@ -51,8 +52,7 @@ export default function TokenInteractionWithVideo() {
         }
         const newBlocks: Block[] = [];
         for (let i = 0; i < count; i++) {
-          const block: any = await getEnhancedBlockDetails(account.address, i);
-          
+          const block = await getEnhancedBlockDetails(account.address, i);
           if (block) {
             const formattedBlock: Block = {
               data: block.data ?? 'No Data', 
