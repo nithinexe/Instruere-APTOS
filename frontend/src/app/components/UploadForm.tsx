@@ -67,7 +67,7 @@ const UploadForm: React.FC = () => {
 {/*     
     <img src="/logo.png" alt="Logo" className="w-96 absolute top-0 left-0" /> */}
     <div className="abolute flex flex-col justify-center items-center h-screen space-y-8">
-<div className="absolute top-6 flex justify-between right-64 space-x-6">
+{/* <div className="absolute top-6 flex justify-between right-64 space-x-6">
   <SignedOut>
     <div className="bg-gradient-to-r from-blue-500 to-purple-500 border-white p-2 border hover:from-blue-700 hover:to-purple-700 duration-500 rounded-md">
     <SignInButton />
@@ -83,7 +83,7 @@ const UploadForm: React.FC = () => {
     <UserButton />
     {/* </div> */}
   {/* </SignedIn> */}
-</div>
+{/* </div>  */}
 
 
         
