@@ -12,7 +12,7 @@ const MainPage = () => {
       <div className="relative h-screen w-full">
         <div className="absolute inset-0 flex flex-col items-center justify-center space-y-8">
           <h1 className="text-6xl bg-gradient-to-r from-blue-500 to-[#933ffd] text-transparent bg-clip-text whitespace-nowrap">
-            Who are you?
+          Commencez la révolution 
           </h1>
 
           <div className="flex space-x-8">
