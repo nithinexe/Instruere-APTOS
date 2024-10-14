@@ -1,19 +1,12 @@
 // import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import "./globals.css";
-
-// import { ThemeProvider } from "@/components/ThemeProvider";
-// import { WalletProvider } from "@/components/WalletProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import { Inter as FontSans } from "next/font/google";
 import { PropsWithChildren } from "react";
-// import { AutoConnectProvider } from "@/components/AutoConnectProvider";
 import { ClerkProvider } from '@clerk/nextjs';
-import Bubbles from './components/Bubble';
 import Logo from './components/Logo';
-import PrelineScript from './components/PrelineScript';
 import { WalletProvider } from "./components/Wallet-Provider";
-import { WalletSelector } from "./components/Wallet-Selector";
 import Wallet from "./components/Wallet";
 
 
@@ -37,23 +30,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
         )}
       >
         <ClerkProvider>
-          {/* <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          > */}
-            {/* <AutoConnectProvider> */}
               <WalletProvider>
-                {/* <Bubbles /> */}
                 <Logo />
                 <Wallet />
                 {children}
                 <Toaster />
               </WalletProvider>
-            {/* </AutoConnectProvider> */}
-          {/* </ThemeProvider> */}
-         
         </ClerkProvider>
       </body>
     </html>
